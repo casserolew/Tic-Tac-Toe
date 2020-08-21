@@ -1,7 +1,10 @@
+import javax.swing.JFrame;
+
 /**
  * The grid represents the game board.
  */
-public class Grid {
+
+public class Grid extends JFrame{
 	// Define the amount of rows and columns
 	int ROWS = 3;			// Rows
 	int COLUMNS = 3;		// Columns
@@ -13,7 +16,16 @@ public class Grid {
 	/**
 	 * Constructor
 	 */
+	private final static String WINDOW_TITLE = "Tic Tac Toe";
+	private final static int WINDOW_WIDTH = 800;
+	private final static int WINDOW_HEIGHT = 600;
+
    public Grid() {
+	   setTitle("WINDOW_TITLE");
+	   setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
+	   setResizable(true);
+	   setVisible(true);
+	   setDefaultCloseOperation(EXIT_ON_CLOSE);
 
       // TODO: Initialise the board array using ROWS and COLUMNS
 
@@ -29,6 +41,9 @@ public class Grid {
     * One way to do this is to check that there are no empty positions left
     */
    public boolean isDraw() {
+	   
+	   (220);
+	   
 
 	   // TODO: Check whether the game has ended in a draw. 
 	   // Hint: Use a nested loop (see the constructor for an example). Check whether any of the Boxes in the board grid are Player.Empty. If they are, it is not a draw.
