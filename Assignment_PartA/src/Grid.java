@@ -6,28 +6,24 @@ import javax.swing.JFrame;
 
 public class Grid extends JFrame{
 	// Define the amount of rows and columns
-	int ROWS = 3;			// Rows
-	int COLUMNS = 3;		// Columns
+	final static int ROWS = 3;			// Rows
+	final static int COLUMNS = 3;		// Columns
 
 	Box[][] board;								// Represents the game board as a grid
 	int currentRow;								// Row that was played last
 	int currentCol;								// Column that was played last
-
+	
 	/**
 	 * Constructor
 	 */
 	private final static String WINDOW_TITLE = "Tic Tac Toe";
 	private final static int WINDOW_WIDTH = 800;
 	private final static int WINDOW_HEIGHT = 600;
+	public static final Grid Initialising = null;
 
    public Grid() {
-	   setTitle("WINDOW_TITLE");
-	   setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
-	   setResizable(true);
-	   setVisible(true);
-	   setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-      // TODO: Initialise the board array using ROWS and COLUMNS
+	   
+      // TODO: Initialize the board array using ROWS and COLUMNS
 
       for (int row = 0; row < ROWS; ++row) {
          for (int col = 0; col < COLUMNS; ++col) {
@@ -41,9 +37,18 @@ public class Grid extends JFrame{
     * One way to do this is to check that there are no empty positions left
     */
    public boolean isDraw() {
+	   boolean isFull = true;
 	   
-	   (220);
-	   
+	   for (int row = 0; row< 3;row++) {
+		   for(int col = 0;col < 3; col++) {
+			   if (board[row][col] == null) {
+				   isFull = false;
+				   
+			   }
+		   }
+	   }
+	   return isFull;
+
 
 	   // TODO: Check whether the game has ended in a draw. 
 	   // Hint: Use a nested loop (see the constructor for an example). Check whether any of the Boxes in the board grid are Player.Empty. If they are, it is not a draw.
@@ -57,14 +62,20 @@ public class Grid extends JFrame{
     */
    public boolean hasWon(Player player) {
 	   // Row check
+	   for(currentRow = 0; currentRow < ROWS; currentRow++) {
 	   if(board[currentRow][0].content == player && board[currentRow][1].content == player && board[currentRow][2].content == player) {
 		   return true;
+	        }
 	   }
 	   // Column check
-
+	   for(currentCol = 0; currentCol < COLUMNS; currentCol++) {
+		   if(board[0][currentCol].content == player && board[1][currentCol].content == player && board[2][currentCol].content == player) {
+			  return true;
+		   }
+	   }
 	   // TODO: Check if the currentCol is filled.
 	   // Hint: Use the row code above as a starting point, remember that it goes board[row][column].
-
+       
 	   // Diagonal check (check both directions
 	   if(board[0][0].content == player && board[1][1].content == player && board[2][2].content == player) {
 		   return true;
@@ -78,24 +89,22 @@ public class Grid extends JFrame{
 
    /**
     * Draws the tic-tac-toe board to the screen
+ * @return 
     */
-   public void display() {
+   public String display() {
+	   String startGrid = " ";
       for (int row = 0; row < ROWS; ++row) {
          for (int col = 0; col < COLUMNS; ++col) {
-
-        	 // Draw the contents of the box
-        	 board[row][col].display();
-
-        	 // Draw the vertical line
-        	 if (col < COLUMNS - 1) System.out.print("|");
-
-    	 }
-         System.out.println();
-
+             // Draw the vertical line
+        	 if (col != COLUMNS - 1)
+        	     startGrid += board[row][col] + "|";
+        	 else 
+        		 startGrid += board[row][col];
+    	    }
          // Draw the horizontal line
-         if (row < ROWS - 1) {
-        	 System.out.println("-----------");
+         if(row != COLUMNS -1)
+        startGrid += "\n--------------\n";
          }
-      }
+      return startGrid;
    }
 } 
